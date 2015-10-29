@@ -1,0 +1,30 @@
+{
+  "name": "angular-electron",
+  "version": "0.1.0",
+  "description": "angularjs helpers for electron apps",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozsay/angular-electron.git"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "electron"
+  ],
+  "author": "Oz Sayag",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ozsay/angular-electron/issues"
+  },
+  "homepage": "https://github.com/ozsay/angular-electron",
+  "dependencies": {
+    "angular": "^1.2.29"
+  },
+  "devDependencies": {
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-uglify": "^1.4.2"
+  }
+}
