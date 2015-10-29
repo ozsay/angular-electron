@@ -1,11 +1,12 @@
 {
   "name": "angular-electron",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "angularjs helpers for electron apps",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ozsay/angular-electron.git"
   },
+  "main": "dist/angular-electron.js",
   "keywords": [
     "angular",
     "angularjs",
