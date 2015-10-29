@@ -1,5 +1,4 @@
-var del    = require('del'),
-    gulp   = require('gulp'),
+var gulp   = require('gulp'),
     concat = require('gulp-concat'),
     insert = require('gulp-insert'),
     uglify = require('gulp-uglify');
@@ -9,11 +8,7 @@ var HEADER = "define(['angular'], function(angular) {\n" +
              "angular.module('angular-electron', []);\n\n";
 var FOOTER = "\n});";
 
-gulp.task('clean', function () {
-  return del(['dist']);
-});
-
-gulp.task('build:dev', ['clean'], function () {
+gulp.task('build:dev', function () {
   return gulp.src('./src/*')
          .pipe(concat('angular-electron.js'))
          .pipe(insert.prepend(HEADER))
@@ -21,7 +16,7 @@ gulp.task('build:dev', ['clean'], function () {
          .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('build:prod', ['clean'], function () {
+gulp.task('build:prod', function () {
   return gulp.src('./src/*')
          .pipe(concat('angular-electron.min.js'))
          .pipe(insert.prepend(HEADER))
