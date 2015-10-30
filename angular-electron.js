@@ -1,4 +1,4 @@
-(function(angular, undefined) {'use strict';
+(function(angular, require, undefined) {'use strict';
 
 angular.module('angular-electron', []);
 
@@ -103,4 +103,4 @@ angular.module('angular-electron').service('safeShutdown', ['$q', 'currentWindow
   };
 }]);
 
-})(window.angular);
+})(window.angular, window.require);
