@@ -6,7 +6,7 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
                    'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib'];
 
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
-  var _remote = 'remote'
+  var _remote = 'remote';
   var remote = require(_remote);
 
   function register(name, _require) {

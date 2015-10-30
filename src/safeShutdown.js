@@ -2,13 +2,13 @@ angular.module('angular-electron').service('safeShutdown', ['$q', 'currentWindow
   var actions = [];
 
   function register(fn) {
-    this.actions.push(fn);
+    actions.push(fn);
   }
 
   function exec() {
     var promises = [];
 
-    angular.forEach(this.actions, function (action) {
+    angular.forEach(actions, function (action) {
       var res = action();
 
       if (res !== undefined && res.then !== undefined) {

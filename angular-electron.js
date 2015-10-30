@@ -25,7 +25,7 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
                    'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib'];
 
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
-  var _remote = 'remote'
+  var _remote = 'remote';
   var remote = require(_remote);
 
   function register(name, _require) {
@@ -70,13 +70,13 @@ angular.module('angular-electron').service('safeShutdown', ['$q', 'currentWindow
   var actions = [];
 
   function register(fn) {
-    this.actions.push(fn);
+    actions.push(fn);
   }
 
   function exec() {
     var promises = [];
 
-    angular.forEach(this.actions, function (action) {
+    angular.forEach(actions, function (action) {
       var res = action();
 
       if (res !== undefined && res.then !== undefined) {
