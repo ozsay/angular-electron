@@ -1,6 +1,6 @@
 {
   "name": "angular-electron",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "angularjs helpers for electron apps",
   "repository": {
     "type": "git",

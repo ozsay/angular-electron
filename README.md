@@ -112,7 +112,7 @@ function(currentWindow) {
 
 ### external link
 
-This is a directive which open a link in the default desktop browser.
+This is a directive which opens a link in the default desktop browser.
 
 ```html
 <a href="https://google.com" external-link>google</a>
