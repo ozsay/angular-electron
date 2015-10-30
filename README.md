@@ -137,3 +137,5 @@ Then use `currentWindow.safeReload` or `app.safeQuit` to reload/quit your app.
 > These methods are available only when safeShutdown is being instantiated.
 
 > The function can return a promise to handle async operations.
+
+> You can register multiple functions
