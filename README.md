@@ -138,4 +138,4 @@ function(safeShutdown) {
 
 Then use `currentWindow.safeReload` or `app.safeQuit` to reload/quit your app.
 
-> These methods are available only after safeShutdown is being instantiated.
+> These methods are available only after safeShutdown is instantiated.
