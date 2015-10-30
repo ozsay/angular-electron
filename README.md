@@ -25,7 +25,7 @@ angular.module('myModule', ['angular-electron']);
 
 ### renderer modules
 
-Theses are all the **renderer modules** that are available as angular services:
+These are all the **renderer modules** that are available as angular services:
 
 `ipc, web-frame, clipboard, crash-reporter,
 native-image, remote, screen, shell`
@@ -40,7 +40,7 @@ angular.module('myModule').controller('myCtrl', ['shell', function(shell) {
 
 ### remote and node modules
 
-Theses are all the **main modules** that are available as angular services:
+These are all the **main modules** that are available as angular services:
 
 `app, auto-updater, browser-window, content-tracing, dialog, global-shortcut,
 menu, menu-item, power-save-blocker, protocol, web-contents, tray`
