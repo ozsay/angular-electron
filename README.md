@@ -51,7 +51,7 @@ menu, menu-item, power-save-blocker, protocol, web-contents, tray`
 path, punycode, querystring, readline, stream, string_decoder, tls, dgram, url,
 util, v8, vm, zlib`
 
-> All of the modules are required upon instantiation.
+> All of the modules are lazy required (required only on use).
 
 ### remoteProvider
 

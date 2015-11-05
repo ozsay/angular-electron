@@ -2,7 +2,7 @@ var wrapModules = ['ipc', 'web-frame', 'clipboard', 'crash-reporter', 'native-im
 
 angular.forEach(wrapModules, function (_module) {
   angular.module('angular-electron').service(_module.name || _module, [function() {
-    var __module = require(_module.require || _module);
+    var __module = electronRequire(_module.require || _module);
 
     return __module;
   }]);

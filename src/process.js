@@ -1,1 +1,1 @@
-angular.module('angular-electron').constant('process', process);
+angular.module('angular-electron').constant('process', electronProcess);

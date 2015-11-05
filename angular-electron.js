@@ -1,4 +1,4 @@
-(function(angular, require, undefined) {'use strict';
+(function(angular, electronRequire, electronProcess, undefined) {'use strict';
 
 angular.module('angular-electron', []);
 
@@ -15,7 +15,7 @@ angular.module('angular-electron').directive('externalLink', ['shell', function 
   };
 }]);
 
-angular.module('angular-electron').constant('process', process);
+angular.module('angular-electron').constant('process', electronProcess);
 
 var remoteModules = ['app', 'auto-updater', 'browser-window', 'content-tracing', 'dialog',
                      'global-shortcut', 'menu', 'menu-item', 'power-save-blocker',
@@ -25,8 +25,7 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
                    'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib'];
 
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
-  var _remote = 'remote';
-  var remote = require(_remote);
+  var remote = electronRequire('remote');
 
   function register(name, _require) {
     _require = _require || name;
@@ -60,7 +59,7 @@ var wrapModules = ['ipc', 'web-frame', 'clipboard', 'crash-reporter', 'native-im
 
 angular.forEach(wrapModules, function (_module) {
   angular.module('angular-electron').service(_module.name || _module, [function() {
-    var __module = require(_module.require || _module);
+    var __module = electronRequire(_module.require || _module);
 
     return __module;
   }]);
@@ -104,4 +103,4 @@ angular.module('angular-electron').service('safeShutdown', ['$q', 'currentWindow
   };
 }]);
 
-})(window.angular, window.require);
+})(window.angular, window.require, window.process);

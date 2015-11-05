@@ -3,9 +3,9 @@ var gulp   = require('gulp'),
     insert = require('gulp-insert'),
     uglify = require('gulp-uglify');
 
-var HEADER = "(function(angular, require, undefined) {'use strict';\n\n" +
+var HEADER = "(function(angular, electronRequire, electronProcess, undefined) {'use strict';\n\n" +
              "angular.module('angular-electron', []);\n\n";
-var FOOTER = "\n})(window.angular, window.require);\n";
+var FOOTER = "\n})(window.angular, window.require, window.process);\n";
 
 gulp.task('build:dev', function () {
   return gulp.src('./src/*')
