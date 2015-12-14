@@ -1,9 +1,7 @@
-var wrapModules = ['ipc', 'web-frame', 'clipboard', 'crash-reporter', 'native-image', 'screen', 'shell'];
+var wrapModules = ['desktopCapturer', 'ipcRenderer', 'webFrame', 'clipboard', 'crashReporter', 'nativeImage', 'screen', 'shell'];
 
 angular.forEach(wrapModules, function (_module) {
   angular.module('angular-electron').service(_module.name || _module, [function() {
-    var __module = electronRequire(_module.require || _module);
-
-    return __module;
+    return electronRequire('electron')[_module.require || _module];
   }]);
 });

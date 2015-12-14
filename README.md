@@ -8,6 +8,8 @@ angularjs helpers for electron apps
 npm install angular-electron
 ```
 
+> Use 0.1.x for electron < 0.35.0 and 0.2.x for electron > 0.35.0
+
 ## Usage
 
 ```html
@@ -27,8 +29,7 @@ angular.module('myModule', ['angular-electron']);
 
 These are all the **renderer modules** that are available as angular services:
 
-`ipc, web-frame, clipboard, crash-reporter,
-native-image, remote, screen, shell`
+`desktopCapturer, ipcRenderer, webFrame, clipboard, crashReporter, nativeImage, screen, shell`
 
 To use them, simply inject them to your components:
 
@@ -42,14 +43,13 @@ angular.module('myModule').controller('myCtrl', ['shell', function(shell) {
 
 These are all the **main modules** that are available as angular services:
 
-`app, auto-updater, browser-window, content-tracing, dialog, global-shortcut,
-menu, menu-item, power-save-blocker, protocol, web-contents, tray`
+`app, autoUpdater, BrowserWindow, contentTracing, dialog, globalShortcut, Menu, MenuItem, powerMonitor,
+powerSaveBlocker, protocol, webContents, tray`
 
 **Node modules**:
 
-`buffer, child_process, cluster, crypto, dns, events, fs, http, https, net, os,
-path, punycode, querystring, readline, stream, string_decoder, tls, dgram, url,
-util, v8, vm, zlib`
+`buffer, child_process, cluster, crypto, dns, events, fs, http, https, net, os, path, punycode,
+querystring, readline, stream, string_decoder, tls, dgram, url, util, v8, vm, zlib`
 
 > All of the modules are lazy required (required only on use).
 
@@ -106,6 +106,17 @@ The current window is also available as angularjs constant.
 ```js
 angular.module('myModule').controller('myCtrl', ['currentWindow',
 function(currentWindow) {
+
+}]);
+```
+
+### current web contents
+
+The current web contents module is also available as angularjs constant.
+
+```js
+angular.module('myModule').controller('myCtrl', ['currentWebContents',
+function(currentWebContents) {
 
 }]);
 ```

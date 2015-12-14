@@ -17,51 +17,54 @@ angular.module('angular-electron').directive('externalLink', ['shell', function 
 
 angular.module('angular-electron').constant('process', electronProcess);
 
-var remoteModules = ['app', 'auto-updater', 'browser-window', 'content-tracing', 'dialog',
-                     'global-shortcut', 'menu', 'menu-item', 'power-save-blocker',
-                     'protocol', 'web-contents', 'tray'];
+var remoteModules = ['app', 'autoUpdater', 'BrowserWindow', 'contentTracing', 'dialog',
+                     'globalShortcut', 'Menu', 'MenuItem', 'powerMonitor', 'powerSaveBlocker',
+                     'protocol', 'webContents', 'tray'];
 var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'events', 'fs', 'http',
                    'https', 'net', 'os', 'path', 'punycode', 'querystring', 'readline', 'stream',
                    'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib'];
 
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
-  var remote = electronRequire('remote');
+  var remote = electronRequire('electron').remote;
 
-  function register(name, _require) {
-    _require = _require || name;
-
-    $provide.service(name, function() {
-      var __module = remote.require(_require);
-
-      return __module;
+  function registerElectronModule(_module) {
+    $provide.service(_module, function() {
+      return remote[_module];
     });
   }
 
-  this.register = register;
+  function registerNodeModule(name, _require) {
+    _require = _require || name;
+
+    $provide.service(name, function() {
+      return remote.require(_require);
+    });
+  }
+
+  this.register = registerNodeModule;
 
   this.$get = [function() {
     return remote;
-  }];
+}];
 
   $provide.constant('remoteProcess', remote.process);
   $provide.constant('currentWindow', remote.getCurrentWindow());
+  $provide.constant('currentWebContents', remote.getCurrentWebContents());
 
   angular.forEach(remoteModules, function(remoteModule) {
-    register(remoteModule.name || remoteModule, remoteModule.require);
+    registerElectronModule(remoteModule);
   });
 
   angular.forEach(nodeModules, function(nodeModule) {
-    register(nodeModule.name || nodeModule, nodeModule.require);
+    registerNodeModule(nodeModule.name || nodeModule, nodeModule.require);
   });
 }]);
 
-var wrapModules = ['ipc', 'web-frame', 'clipboard', 'crash-reporter', 'native-image', 'screen', 'shell'];
+var wrapModules = ['desktopCapturer', 'ipcRenderer', 'webFrame', 'clipboard', 'crashReporter', 'nativeImage', 'screen', 'shell'];
 
 angular.forEach(wrapModules, function (_module) {
   angular.module('angular-electron').service(_module.name || _module, [function() {
-    var __module = electronRequire(_module.require || _module);
-
-    return __module;
+    return electronRequire('electron')[_module.require || _module];
   }]);
 });
 
