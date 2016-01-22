@@ -37,7 +37,7 @@ angular.module('angular-electron').provider('remote', ['$provide', function($pro
     _require = _require || name;
 
     $provide.service(name, function() {
-      return remote.require(_require);
+      return typeof _require === 'function' ? _require(remote) : remote.require(_require);
     });
   }
 

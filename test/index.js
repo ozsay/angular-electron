@@ -1,5 +1,11 @@
 angular.module('myModule', ['angular-electron']);
 
+angular.module('myModule').config(function(remoteProvider) {
+    remoteProvider.register('exec', function(remote) {
+        return remote.require('child_process').exec;
+    });
+});
+
 angular.module('myModule').controller('TestCtrl', function($injector) {
     var modules = ['desktopCapturer', 'ipcRenderer', 'webFrame', 'clipboard', 'crashReporter', 'nativeImage', 'screen', 'shell'];
 
@@ -15,6 +21,8 @@ angular.module('myModule').controller('TestCtrl', function($injector) {
     modules = modules.concat(['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'events', 'fs', 'http',
         'https', 'net', 'os', 'path', 'punycode', 'querystring', 'readline', 'stream',
         'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib']);
+
+    modules.push('exec');
 
     angular.forEach(modules, function(_module) {
         var injected = $injector.get(_module);
