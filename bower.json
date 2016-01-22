@@ -1,0 +1,22 @@
+{
+  "name": "angular-electron",
+  "description": "angularjs helpers for electron apps",
+  "main": "angular-electron.js",
+  "authors": [
+    "Oz Sayag"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "electron"
+  ],
+  "homepage": "https://github.com/ozsay/angular-electron",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

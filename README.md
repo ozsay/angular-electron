@@ -8,6 +8,10 @@ angularjs helpers for electron apps
 npm install angular-electron
 ```
 
+```bash
+bower install angular-electron
+```
+
 > Use 0.1.x for electron < 0.35.0 and 0.2.x for electron > 0.35.0
 
 ## Usage
