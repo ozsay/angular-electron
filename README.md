@@ -92,6 +92,24 @@ angular.module('myModule').controller('myCtrl', ['newName', function(moment) {
 }]);
 ```
 
+You can also register a module by function:
+
+```js
+angular.module('myModule').config(['remoteProvider', function(remoteProvider) {
+  remoteProvider.register('exec', function(remote) {
+    return remote.require('child_process').exec;
+  });
+}]);
+```
+
+then use it
+
+```js
+angular.module('myModule').controller('myCtrl', ['exec', function(exec) {
+    exec('ls');
+}]);
+```
+
 ### process objects
 
 electron process objects are available as angularjs constants.
