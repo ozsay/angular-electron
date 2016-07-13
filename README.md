@@ -72,7 +72,7 @@ or
 
 ```js
 angular.module('myModule').config(['remoteProvider', function(remoteProvider) {
-  remoteProvider.register({name: 'newName', require: 'moment'});
+  remoteProvider.register('newName', 'moment');
 }]);
 ```
 
