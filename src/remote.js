@@ -8,8 +8,9 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
   var remote = electronRequire('electron').remote;
 
-  function registerElectronModule(_module) {
-    $provide.service(_module, function() {
+  function registerElectronModule(_module, _require) {
+    _require = _require || _module;
+    $provide.service(_require, function() {
       return remote[_module];
     });
   }
@@ -23,6 +24,7 @@ angular.module('angular-electron').provider('remote', ['$provide', function($pro
   }
 
   this.register = registerNodeModule;
+  this.registerFromElectron = registerElectronModule;
 
   this.$get = [function() {
     return remote;
