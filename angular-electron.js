@@ -27,10 +27,10 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
   var remote = electronRequire('electron').remote;
 
-  function registerElectronModule(_module, _require) {
-    _require = _require || _module;
-    $provide.service(_require, function() {
-      return remote[_module];
+  function registerElectronModule(providerName, moduleName) {
+    moduleName = moduleName || providerName;
+    $provide.service(providerName, function() {
+      return remote[moduleName];
     });
   }
 
