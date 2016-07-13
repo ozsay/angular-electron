@@ -19,7 +19,7 @@ angular.module('angular-electron').constant('process', electronProcess);
 
 var remoteModules = ['app', 'autoUpdater', 'BrowserWindow', 'contentTracing', 'dialog',
                      'globalShortcut', 'Menu', 'MenuItem', 'powerMonitor', 'powerSaveBlocker',
-                     'protocol', 'webContents', 'tray'];
+                     'protocol', 'webContents', 'Tray'];
 var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'events', 'fs', 'http',
                    'https', 'net', 'os', 'path', 'punycode', 'querystring', 'readline', 'stream',
                    'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib'];
@@ -27,9 +27,10 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
   var remote = electronRequire('electron').remote;
 
-  function registerElectronModule(_module) {
-    $provide.service(_module, function() {
-      return remote[_module];
+  function registerElectronModule(providerName, moduleName) {
+    moduleName = moduleName || providerName;
+    $provide.service(providerName, function() {
+      return remote[moduleName];
     });
   }
 
@@ -42,6 +43,7 @@ angular.module('angular-electron').provider('remote', ['$provide', function($pro
   }
 
   this.register = registerNodeModule;
+  this.registerFromElectron = registerElectronModule;
 
   this.$get = [function() {
     return remote;
