@@ -25,7 +25,35 @@ var nodeModules = ['buffer', 'child_process', 'cluster', 'crypto', 'dns', 'event
                    'string_decoder', 'tls', 'dgram', 'url', 'util', 'v8', 'vm', 'zlib'];
 
 angular.module('angular-electron').provider('remote', ['$provide', function($provide) {
-  var remote = electronRequire('electron').remote;
+  var remote = null;
+
+  if (usingElectron() === true){
+    remote = electronRequire('electron').remote;
+
+    this.register = registerNodeModule;
+
+    angular.forEach(remoteModules, function(remoteModule) {
+      registerElectronModule(remoteModule);
+    });
+
+    angular.forEach(nodeModules, function(nodeModule) {
+      registerNodeModule(nodeModule.name || nodeModule, nodeModule.require);
+    });
+
+    $provide.constant('remoteProcess', remote.process);
+    $provide.constant('currentWindow', remote.getCurrentWindow());
+    $provide.constant('currentWebContents', remote.getCurrentWebContents());
+  }
+
+  this.$get = [function() {
+    return remote;
+  }];
+
+  $provide.constant('usingElectron', usingElectron());
+
+  function usingElectron(){
+    return angular.isDefined(electronRequire) && angular.isDefined(electronRequire('electron'));
+  }
 
   function registerElectronModule(_module) {
     $provide.service(_module, function() {
@@ -41,23 +69,6 @@ angular.module('angular-electron').provider('remote', ['$provide', function($pro
     });
   }
 
-  this.register = registerNodeModule;
-
-  this.$get = [function() {
-    return remote;
-}];
-
-  $provide.constant('remoteProcess', remote.process);
-  $provide.constant('currentWindow', remote.getCurrentWindow());
-  $provide.constant('currentWebContents', remote.getCurrentWebContents());
-
-  angular.forEach(remoteModules, function(remoteModule) {
-    registerElectronModule(remoteModule);
-  });
-
-  angular.forEach(nodeModules, function(nodeModule) {
-    registerNodeModule(nodeModule.name || nodeModule, nodeModule.require);
-  });
 }]);
 
 var wrapModules = ['desktopCapturer', 'ipcRenderer', 'webFrame', 'clipboard', 'crashReporter', 'nativeImage', 'screen', 'shell'];
