@@ -10,7 +10,7 @@ if (typeof electronRequire == 'undefined') {
           getCurrentWebContents: function () {
             return false;
           }
-        },
+        }
       };
     }
   }
